@@ -1,8 +1,8 @@
 interface Data {
-    name: string;
-    weight: string;
-    value: string;
-    amount: string;
+    nome: string;
+    peso: string;
+    valor: string;
+    quantidade: string;
 }
 
 import fs from 'fs';
@@ -81,6 +81,8 @@ const main = async () => {
           } else {
             addItemNoEstoque(valoresDoUsuario[1], valoresDoUsuario[2], valoresDoUsuario[3], valoresDoUsuario[4]);
           }
+          break;
+        case 'r':
           break;
         default:
           console.log("Escolha inválida!");
