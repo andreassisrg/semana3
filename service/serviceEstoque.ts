@@ -5,7 +5,7 @@ import fs from "fs";
 
 const filePath = "./model/estoque.csv"
 
-class estoqueService {
+export class estoqueService {
     async criar(data: Data) {
         if (typeof data.nome !== 'string' || isNaN(data.valor) || isNaN(data.peso) || isNaN(data.quantidade)) {
             throw new Error("Dados inválidos para o produto");
@@ -38,6 +38,15 @@ class estoqueService {
             throw new Error("Produto não existe no estoque");
         } else {
             await writeCSV(filePath, novoEstoque);
+        }
+    }
+
+    async listar() {
+        const estoque = await readCSV(filePath);
+        
+        for (let i = 0; i < estoque.length; i++) {
+            console.log(`Nome: ${estoque[i].nome}, Valor: ${estoque[i].valor},
+            Peso: ${estoque[i].peso}, Quantidade: ${estoque[i].quantidade}`);
         }
     }
 }
