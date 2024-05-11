@@ -26,3 +26,21 @@ export async function listarProdutos() {
         console.log("Erro ao listar os produtos do estoque", error);
     }
 }
+
+export async function somarValoresProdutos() {
+    try {
+        await valorTotal = estoqueService.somarValor();
+        console.log(`O valor total dos produtos é ${valorTotal}`);
+    } catch (error) {
+        console.log("Error ao somar os valores dos produtos", error)
+    }
+}
+
+export async function somarPesoProdutos() {
+    try {
+        await pesoTotal = estoqueService.somarPeso();
+        console.log(`O peso total dos produtos é ${pesoTotal}`);
+    } catch (error) {
+        console.log("Erro ao somar os valores dos produtos", error);
+    }
+}
