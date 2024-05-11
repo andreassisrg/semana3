@@ -49,4 +49,26 @@ export class estoqueService {
             Peso: ${estoque[i].peso}, Quantidade: ${estoque[i].quantidade}`);
         }
     }
+
+    async somarValor() {
+        const estoque = await readCSV(filePath);
+
+        let total: number  = 0;
+        for (let i = 0; i < estoque.length; i++) {
+            total += (parseFloat(estoque[i].valor, 10) * parseInt(estoque[i].quantidade, 10));
+        }
+
+        return total;
+    }
+
+    async somarPeso() {
+        const estoque = await readCSV(filePath);
+
+        let total: number = 0;
+        for (let i = 0; i < estoque.length; i++) {
+            total += (parseFloat(estoque[i].peso) * parseInt(estoque[i].quantidade));
+        }
+
+        return total;
+    }
 }
