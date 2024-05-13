@@ -13,7 +13,7 @@ export async function adicionarProduto(data: Data) {
 export async function removerProduto(nome: string) {
     try {
         await estoqueService.remover(nome);
-        console.log("Produto removido com sucesso");
+        console.log(`Produto ${nome} removido com sucesso`);
     } catch (error) {
         console.log("Erro ao remover produto do estoque", error);
     }
