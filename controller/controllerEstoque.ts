@@ -29,8 +29,9 @@ export async function listarProdutos() {
 
 export async function somarValoresProdutos() {
     try {
-        const valorTotal = await estoqueService.somarValor();
-        console.log(`O valor total dos produtos é ${valorTotal}`);
+        let valorTotal = await estoqueService.somarValor();
+        valorTotal = parseFloat(valorTotal.toFixed(2));
+        console.log(`O valor total dos produtos é R$${valorTotal}`);
     } catch (error) {
         console.log("Error ao somar os valores dos produtos", error)
     }
@@ -38,8 +39,9 @@ export async function somarValoresProdutos() {
 
 export async function somarPesoProdutos() {
     try {
-        const pesoTotal = await estoqueService.somarPeso();
-        console.log(`O peso total dos produtos é ${pesoTotal}`);
+        let pesoTotal = await estoqueService.somarPeso();
+        pesoTotal = parseFloat(pesoTotal.toFixed(2));
+        console.log(`O peso total dos produtos é ${pesoTotal} kg`);
     } catch (error) {
         console.log("Erro ao somar os valores dos produtos", error);
     }
@@ -57,8 +59,9 @@ export async function mediaValoresProdutos() {
 
 export async function mediaPesoProdutos() {
     try {
-        const peso: number = await estoqueService.mediaPeso();
-        console.log(`A média do peso dos produtos é ${peso}`);
+        let peso: number = await estoqueService.mediaPeso();
+        peso = parseFloat(peso.toFixed(2));
+        console.log(`A média do peso dos produtos é ${peso} kg `);
     } catch (error) {
         console.log("Erro ao calcular média do peso dos produtos", error);
     }
