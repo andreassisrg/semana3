@@ -1,7 +1,8 @@
+import { Data } from "./interfaceData";
 import fs from 'fs';
 import csv from 'csv-parser';
 
-const readCSV = async (filePath: string): Promise<Data[]> => {
+export const readCSV = async (filePath: string): Promise<Data[]> => {
   return new Promise((resolve, reject) => {
     const results: Data[] = [];
     fs.createReadStream(filePath)

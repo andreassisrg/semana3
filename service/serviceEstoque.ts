@@ -1,13 +1,19 @@
-import readCSV from "../model/readCSV";
-import writeCSV from "..model/writeCSV";
+import { readCSV } from "../model/readCSV";
+import { writeCSV } from "../model/writeCSV";
 import { Data } from "../model/interfaceData";
 import fs from "fs";
 
 const filePath = "./model/estoque.csv"
 
 export class estoqueService {
-    async criar(data: Data) {
-        if (typeof data.nome !== 'string' || isNaN(data.valor) || isNaN(data.peso) || isNaN(data.quantidade)) {
+    static async criar(data: Data) {
+
+        const nome = data.nome;
+        const valor = parseFloat(data.valor);
+        const peso = parseFloat(data.peso);
+        const quantidade = parseFloat(data.quantidade);
+
+        if (typeof nome !== 'string' || isNaN(valor) || isNaN(peso) || isNaN(quantidade)) {
             throw new Error("Dados inválidos para o produto");
         }
 
@@ -21,7 +27,7 @@ export class estoqueService {
         await writeCSV(filePath, [data]);
     }
 
-    async remover(nome: string) {
+    static async remover(nome: string) {
         const estoque = await readCSV(filePath);
         let novoEstoque: Data[] = [];
         let found: boolean = false;
@@ -31,7 +37,7 @@ export class estoqueService {
                 found = true;
                 continue;
             }
-            novoEstoque += estoque[i];
+            novoEstoque.push(estoque[i]);
         }
         
         if (!found) {
@@ -41,7 +47,7 @@ export class estoqueService {
         }
     }
 
-    async listar() {
+    static async listar() {
         const estoque = await readCSV(filePath);
         
         for (let i = 0; i < estoque.length; i++) {
@@ -50,18 +56,18 @@ export class estoqueService {
         }
     }
 
-    async somarValor() {
+    static async somarValor() {
         const estoque = await readCSV(filePath);
 
         let total: number  = 0;
         for (let i = 0; i < estoque.length; i++) {
-            total += (parseFloat(estoque[i].valor, 10) * parseInt(estoque[i].quantidade, 10));
+            total += (parseFloat(estoque[i].valor) * parseInt(estoque[i].quantidade, 10));
         }
 
         return total;
     }
 
-    async somarPeso() {
+    static async somarPeso() {
         const estoque = await readCSV(filePath);
 
         let total: number = 0;
@@ -70,5 +76,43 @@ export class estoqueService {
         }
 
         return total;
+    }
+
+    static async mediaValor() {
+        const estoque = await readCSV(filePath);
+
+        let total: number  = 0;
+        for (let i = 0; i < estoque.length; i++) {
+            total += (parseFloat(estoque[i].valor) * parseInt(estoque[i].quantidade, 10));
+        }
+
+        return total / estoque.length;
+    }
+
+    static async mediaPeso() {
+        const estoque = await readCSV(filePath);
+
+        let total: number = 0;
+        for (let i = 0; i < estoque.length; i++) {
+            total += (parseFloat(estoque[i].peso) * parseInt(estoque[i].quantidade, 10));
+        }
+
+        return total / estoque.length;
+    }
+
+    static async itensTotal() {
+        const estoque = await readCSV(filePath);
+
+        let itens: number = 0;
+        for (let i = 0; i < estoque.length; i++) {
+            itens += parseInt(estoque[i].quantidade, 10);
+        }
+
+        return itens;
+    }
+
+    static async produtosTotal() {
+        const estoque = await readCSV(filePath);
+        return estoque.length;
     }
 }

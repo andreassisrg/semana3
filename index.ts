@@ -1,8 +1,7 @@
-import { Data } from "../model/interfaceData";
-import * from "/controller/controllerEstoque"
+import { Data } from "./model/interfaceData";
+import { adicionarProduto } from "./controller/controllerEstoque";
 
 import * as readline from 'readline';
-import { adicionarProduto } from "./controller/controllerEstoque";
 const main = async () => {
     const rl = readline.createInterface({
       input: process.stdin,
