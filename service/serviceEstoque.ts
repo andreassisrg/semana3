@@ -11,7 +11,7 @@ export class estoqueService {
         const nome = data.nome;
         const valor = parseFloat(data.valor);
         const peso = parseFloat(data.peso);
-        const quantidade = parseFloat(data.quantidade);
+        const quantidade = parseInt(data.quantidade, 10);
 
         if (typeof nome !== 'string' || isNaN(valor) || isNaN(peso) || isNaN(quantidade)) {
             throw new Error("Dados inválidos para o produto");
@@ -43,7 +43,7 @@ export class estoqueService {
         if (!found) {
             throw new Error("Produto não existe no estoque");
         } else {
-            await writeCSV(filePath, novoEstoque);
+            await writeCSV(filePath, novoEstoque, false);
         }
     }
 
@@ -51,8 +51,7 @@ export class estoqueService {
         const estoque = await readCSV(filePath);
         
         for (let i = 0; i < estoque.length; i++) {
-            console.log(`Nome: ${estoque[i].nome}, Valor: ${estoque[i].valor},
-            Peso: ${estoque[i].peso}, Quantidade: ${estoque[i].quantidade}`);
+            console.log(`Nome: ${estoque[i].nome}, Valor: ${estoque[i].valor}, Peso: ${estoque[i].peso}, Quantidade: ${estoque[i].quantidade}`);
         }
     }
 

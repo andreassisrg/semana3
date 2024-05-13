@@ -47,8 +47,9 @@ export async function somarPesoProdutos() {
 
 export async function mediaValoresProdutos() {
     try {
-        const media: number = await estoqueService.mediaValor();
-        console.log(`A média dos valores dos produtos é ${media}`);
+        let media: number = await estoqueService.mediaValor();
+        media = parseFloat(media.toFixed(2));
+        console.log(`A média dos valores dos produtos é R$${media}`);
     } catch (error) {
         console.log("Erro ao calcular média dos valores dos produtos", error);
     }
