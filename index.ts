@@ -5,7 +5,7 @@ const prompt = require('prompt-sync')({sigint: true});
 
 function receber(userPrompt: string) {
   console.clear();
-  return prompt(userPrompt).trim();
+  return prompt(userPrompt);
 }
 
 const menu: string = `
@@ -48,9 +48,6 @@ const main = async () => {
   
     case 2:
       var X = receber("Digite o nome do produto: ");
-      
-      // TO-DO mostrar informações do produto e confirmar com usuário
-
       await removerProduto(X);
       break;
 
