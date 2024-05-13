@@ -1,4 +1,4 @@
-interface Data {
+export interface Data {
     nome: string;
     valor: string;
     peso: string;
